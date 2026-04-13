@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: viewx-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+      - IG_USER=${IG_USER:-}
+      - IG_PASS=${IG_PASS:-}
+    networks:
+      - viewx-network
+    restart: unless-stopped
+    shm_size: '2gb'
+
+  frontend:
+    build:
+      context: ./desafio-viewx
+      dockerfile: Dockerfile
+    container_name: viewx-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - viewx-network
+    restart: unless-stopped
+
+networks:
+  viewx-network:
+    driver: bridge
