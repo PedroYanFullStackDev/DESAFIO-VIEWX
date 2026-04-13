@@ -9,8 +9,7 @@ services:
     environment:
       - PORT=5000
       - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-      - IG_USER=${IG_USER:-}
-      - IG_PASS=${IG_PASS:-}
+      - IG_SESSION_ID=${IG_SESSION_ID:33230648311%3ARVMcMbLeEc1UrF%3A21%3AAYiHpCRizO4RVIGEMSKdx_yNygDBYWioLK5vGfHxYw}
     networks:
       - viewx-network
     restart: unless-stopped
